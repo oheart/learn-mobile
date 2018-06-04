@@ -76,7 +76,7 @@ box.addEventListener(
 document.addEventListener(
     'touchstart',
     function(e){
-        e.preventDefault();
+        e.preventDefault(); // 阻止默认事件
     },
     false
 )
@@ -86,7 +86,7 @@ chrome下报错，改成下面的：
 document.addEventListener(
     'touchstart',
     function(e){
-        e.preventDefault();
+        e.preventDefault(); // 阻止默认事件
     },
     {
         passive: false
@@ -94,18 +94,21 @@ document.addEventListener(
 )
 ```
 - e.preventDefault 阻止默认事件，阻止掉document的touchstart事件，可以解决以下问题
-    - 阻止页面上的文字被选中
+    - 阻止页面上的文字被选中（可以通过阻止冒泡使某个元素上的文字被选中）
     - 阻止页面上的系统菜单  
 - 隐患
   - 页面上所有滚动条失效
 - 让部分文字长按可以复制
+
+注： 可以通过阻止冒泡使某个元素上的文字被选中
+
 ```js
 var copy = document.querySelector('.copy'); // 可以复制的div元素
 
 copy.addEventListener(
     'touchstart',
     function (e) {
-        e.stopPropagation();
+        e.stopPropagation();   // 阻止冒泡
     },
     false
 )
