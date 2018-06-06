@@ -66,6 +66,16 @@
         
     </style>
     <script>
+        // 阻止默认的橡皮筋效果
+        document.addEventListener(
+            'touchstart',
+            function(e){
+                e.preventDefault();
+            },
+            {
+                passive: false
+            }
+        )
         window.onload = function(){
             var wrap = document.querySelector('#wrap');
             var list = document.querySelector('#list');
@@ -80,6 +90,34 @@
             style += "#list{width:" + lis.length + "00%}";
             style += "#list li{width:" + ( 1/lis.length * 100 ) + "%}"
             css.innerHTML += style;
+
+            // 拖拽
+            var startPoint = 0; // 手指的初始坐标
+            var startX = 0;  // 元素的初始坐标
+            wrap.addEventListener(
+                'touchstart',
+                function(e){
+                    startPoint = e.changedTouches[0].pageX;
+                    startX = list.offsetLeft;
+                }
+            )
+            wrap.addEventListener(
+                'touchmove',
+                function(e){
+                    var nowPoint = e.changedTouches[0].pageX;
+                    var dis = nowPoint - startPoint;  // 手指移动距离差值
+                    var left = startX + dis;  // 需要移动的距离
+                    list.style.left = left + 'px';
+                }
+            )
+            wrap.addEventListener(
+                'touchend',
+                function(e){
+                    var left = list.offsetLeft;  // 获取到当前移动的left值
+                    var now = Math.round(-left/ wrap.offsetWidth);  // 获取要停留在那张图的位置
+                    console.log('now', now)
+                }
+            )
 
 
         }
