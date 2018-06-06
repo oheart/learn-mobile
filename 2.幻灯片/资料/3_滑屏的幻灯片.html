@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>无标题文档</title>
+<style id="css">
+body {
+	margin: 0;
+}
+#wrap {
+	overflow: hidden;
+	position: relative;
+}
+#list {
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#list li {
+	float: left;
+}
+#list img {
+	width: 100%;
+	display: block;
+}
+#nav {
+	position: absolute;
+	left: 0;
+	bottom: 3px;
+	width: 100%;
+	line-height: 10px;
+	text-align: center;
+}
+#nav span {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background: #C00;
+	border-radius: 5px;
+}
+#nav .active {
+	background: #0F0;
+}
+</style>
+<script>
+document.addEventListener(
+	"touchstart",
+	function (e){
+		e.preventDefault();
+	}
+);
+window.onload = function (){
+	var wrap = document.querySelector("#wrap");
+	var list = document.querySelector("#list");
+	var lis = document.querySelectorAll("#list li");
+	var css = document.querySelector("#css");
+	var nav = document.querySelectorAll("#nav span");
+	var style = "#wrap{height:"+ lis[0].offsetHeight+"px}";
+	style+="#list{width:"+lis.length+"00%}";
+	style+="#list li{width:"+(1/lis.length*100)+"%}"
+	css.innerHTML+= style;
+	var startPoint = 0;
+	var startX = 0;
+	var translateX = 0;
+	wrap.addEventListener(
+		"touchstart",
+		function(e) {
+			startPoint = e.changedTouches[0].pageX;
+			startX = translateX;
+		}
+	);
+	wrap.addEventListener(
+		"touchmove",
+		function(e) {
+			var nowPoint = e.changedTouches[0].pageX;
+			var dis = nowPoint - startPoint;
+			translateX= startX + dis;
+			list.style.WebkitTransform = list.style.transform = "translateX("+translateX+"px)";
+		}
+	);
+	// getcomputedstyle 获取计算后的样式
+	wrap.addEventListener(
+		"touchend",
+		function(e) {
+			var now = Math.round(-translateX / wrap.offsetWidth);
+			translateX = -now * wrap.offsetWidth;
+			list.style.WebkitTransform = list.style.transform = "translateX("+translateX+"px)";
+			for(var i = 0 ; i < nav.length; i++) {
+				nav[i].className = "";
+			}
+			nav[now].className = "active";
+		}
+	);
+	
+};
+</script>
+</head>
+<body>
+<div id="wrap">
+	<ul id="list">
+    	<li>
+        	<a href="#">
+            	<img src="img/1.jpg" />
+            </a>
+        </li>
+        <li>
+        	<a href="#">
+            	<img src="img/2.jpg" />
+            </a>
+        </li>
+        <li>
+        	<a href="#">
+            	<img src="img/3.jpg" />
+            </a>
+        </li>
+        <li>
+        	<a href="#">
+            	<img src="img/4.jpg" />
+            </a>
+        </li>
+        <li>
+        	<a href="#">
+            	<img src="img/5.jpg" />
+            </a>
+        </li>
+    </ul>
+    <nav id="nav">
+    	<span class="active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </nav>
+</div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>无标题文档</title>
+<style id="css">
+body {
+	margin: 0;
+}
+#wrap {
+	overflow: hidden;
+	position: relative;
+}
+#list {
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#list li {
+	float: left;
+}
+#list img {
+	width: 100%;
+	display: block;
+}
+#nav {
+	position: absolute;
+	left: 0;
+	bottom: 3px;
+	width: 100%;
+	line-height: 10px;
+	text-align: center;
+}
+#nav span {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background: #C00;
+	border-radius: 5px;
+}
+#nav .active {
+	background: #0F0;
+}
+</style>
+<script src="transform.js"></script>
+<script>
+document.addEventListener(
+	"touchstart",
+	function (e){
+		e.preventDefault();
+	}
+);
+window.onload = function (){
+	var wrap = document.querySelector("#wrap");
+	var list = document.querySelector("#list");
+	list.innerHTML += list.innerHTML;
+	var lis = document.querySelectorAll("#list li");
+	var css = document.querySelector("#css");
+	var nav = document.querySelectorAll("#nav span");
+	var style = "#wrap{height:"+ lis[0].offsetHeight+"px}";
+	var timer = 0;
+	style+="#list{width:"+lis.length+"00%}";
+	style+="#list li{width:"+(1/lis.length*100)+"%}"
+	css.innerHTML+= style;
+	var startPoint = 0;
+	var startX = 0;
+	var now = 0;
+	cssTransform(list,"translateX",0);
+	auto();
+	wrap.addEventListener(
+		"touchstart",
+		function(e) {
+			list.style.transition = "none";
+			var translateX = cssTransform(list,"translateX");
+			var now = Math.round(-translateX / wrap.offsetWidth);
+			if(now == 0) {
+				now = nav.length;
+			}
+			if(now == lis.length-1) {
+				now = nav.length-1;
+			}
+			cssTransform(list,"translateX",-now * wrap.offsetWidth);
+			startPoint = e.changedTouches[0].pageX;
+			startX = cssTransform(list,"translateX");
+		}
+	);
+	wrap.addEventListener(
+		"touchmove",
+		function(e) {
+			var nowPoint = e.changedTouches[0].pageX;
+			var dis = nowPoint - startPoint;
+			cssTransform(list,"translateX",startX + dis);
+		}
+	);
+	wrap.addEventListener(
+		"touchend",
+		function(e) {
+			var translateX = cssTransform(list,"translateX");
+			var now = Math.round(-translateX / wrap.offsetWidth);
+			list.style.transition = ".5s";
+			cssTransform(list,"translateX",-now * wrap.offsetWidth);
+			for(var i = 0 ; i < nav.length; i++) {
+				nav[i].className = "";
+			}
+			nav[now%nav.length].className = "active";
+		}
+	);
+	function auto() {
+		timer = setInterval(
+			function() {
+				now++;
+				list.style.transition = ".5s";
+				cssTransform(list,"translateX",-now * wrap.offsetWidth);
+				for(var i = 0 ; i < nav.length; i++) {
+					nav[i].className = "";
+				}
+				nav[now%nav.length].className = "active";
+			},3000
+		);
+	}
+};
+</script>
+</head>
+<body>
+<div id="wrap">
+	<ul id="list">
+    	<li>
+        	<a href="#">
+            	<img src="img/1.jpg" />
+            </a>
+        </li>
+        <li>
+        	<a href="#">
+            	<img src="img/2.jpg" />
+            </a>
+        </li>
+        <li>
+        	<a href="#">
+            	<img src="img/3.jpg" />
+            </a>
+        </li>
+        <li>
+        	<a href="#">
+            	<img src="img/4.jpg" />
+            </a>
+        </li>
+        <li>
+        	<a href="#">
+            	<img src="img/5.jpg" />
+            </a>
+        </li>
+    </ul>
+    <nav id="nav">
+    	<span class="active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </nav>
+</div>
+</body>
+</html>
