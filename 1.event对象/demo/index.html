@@ -11,226 +11,122 @@
     <meta name="sharetitle" content="分享标题内容" />
     <meta name="shareurl" content="分享地址" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
-    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="full-screen" content="true" />
     <meta name="screen-orientation" content="portrait" />
     <meta name="x5-fullscreen" content="true" />
     <meta name="360-fullscreen" content="true" />
-    <meta content="telephone=no" name="format-detection" />
-    <link href="css/reset.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
-    <script src="js/fontSize.js"></script>
+    <meta content="telephone=no" name="format-detection" /> -->
+    <!-- <link href="css/reset.css" rel="stylesheet" /> -->
+    <!-- <link href="css/style.css" rel="stylesheet" /> -->
+    <!-- <script src="js/fontSize.js"></script> -->
     <style>
-        .box {
-            width: 100px;
-            height: 100px;
-            background: red;
-            color: #FFF;
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #wrap {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #scroll {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background: #ccc;
         }
     </style>
     <script>
-        document.addEventListener(
-            'touchstart',
-            function (e) {
-                e.preventDefault();
-            },
-            {
-                passive: false
-            }
-        )
+        /*
+            1. 手指按下去的时候，记录下手指坐标
+            2. 移动的时候，记录手指坐标
+            3. 用移动后的坐标 - 移动前的坐标 = 手指移动的距离
+            4. 手指按下的时候，记录下元素的位置
+            5. 移动之后，元素的初始位置 + 用手指移动的距离  = 元素现在所要在的位置
+        */
+        window.onload = function () {
+            var wrap = document.querySelector('#wrap');
+            var scroll = document.querySelector('#scroll');
 
+            var startPoint = 0; // 手指移动前的坐标
+            var startEl = 0; // 元素开始坐标
+            var maxTop = wrap.clientHeight - scroll.offsetHeight; // 能向上移动的最大距离
+            console.log('maxTop', maxTop);
+            wrap.addEventListener(
+                'touchstart',
+                function (e) {
+                    var touch = e.changedTouches[0];
+                    startPoint = touch.pageY;
+                    startEl = scroll.offsetTop;
+                }
+            )
+            wrap.addEventListener(
+                "touchmove",
+                function (e) {
+                    var touch = e.changedTouches[0];
+                    var nowPoint = touch.pageY;    // 当前的手指坐标
+                    var dis = nowPoint - startPoint;  // 手指移动的距离
+                    var top = startEl + dis;     // 获取元素现在所在的位置（元素的初始位置 + 手指移动的距离）
+                    console.log('dis', dis);
+                    if(top > 0){
+                        top  = 0;
+                    }
+                    if(top < maxTop){
+                        top = maxTop;
+                    }
+                    scroll.style.top = top + 'px';  // 设置元素现在所在的位置
+                }
+            )
+        }
     </script>
 </head>
 
 <body>
-    <div class="box">
-        阻止页面上的文字选中和系统菜单<br/>
-        <span class="copy">这里能复制哦</span>
+    <div id="wrap">
+        <div id="scroll">
+            民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/> 民国时期高考题长这样！别说英文了，汉语题看了都慌
+            <br/>
+        </div>
     </div>
-    阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/> 阻止页面上的文字选中和系统菜单
-    <br/>
 
     <script>
 
-        /*
-             e.preventDefault 阻止默认事件
-             阻止掉： document的touchstart事件，可以解决以下问题
-             1. 阻止页面上的文字被选中
-             2. 阻止页面上的系统菜单
-             隐患：
-             1. 页面上所有滚动条失效
-        */
-        window.onload = function () {
-            var box = document.querySelector('.box');
-            var copy = document.querySelector('.copy');
-
-            box.addEventListener(
-                'touchstart',
-                function (e) {
-                    console.log('event对象：', e);
-                },
-                false
-            )
-
-
-            copy.addEventListener(
-                'touchstart',
-                function (e) {
-                    e.stopPropagation();
-                },
-                false
-            )
-            /*
-                事件函数中默认的第一个参数是event对象
-            */
-        }
     </script>
 </body>
 

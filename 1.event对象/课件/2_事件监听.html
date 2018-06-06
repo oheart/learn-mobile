@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>无标题文档</title>
+<style>
+.box {
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+</style>
+<script>
+window.onload = function () {
+	var box = document.querySelector(".box");
+	//box.style.background = "blue";
+	/* 
+		touchstart 手指触摸 == mousedown 
+		touchend 手指抬起 == mouseup
+		touchmove 手指抬起 == mousmove
+		
+		touch事件  在 chrome的模拟器下，部分版本 通过on的方式来添加事件无效
+		
+		addEventListener("事件名",函数,冒泡或捕获);
+		1. 不会存在前后覆盖问题
+		2. 在chrome的模拟器下可以一直识别
+	*/
+	/*box.ontouchstart = function () {
+		console.log(1);
+	};*/
+	box.addEventListener(
+		"touchstart",
+		function() {
+			console.log(1);
+		}
+	);
+	box.addEventListener(
+		"touchstart",
+		function() {
+			console.log(2);
+		}
+	);
+	box.addEventListener(
+		"touchstart",
+		fn		
+	);
+	function fn() {
+		console.log(3);
+	}
+};
+</script>
+</head>
+<body>
+<div class="box"></div>
+</body>
+</html>

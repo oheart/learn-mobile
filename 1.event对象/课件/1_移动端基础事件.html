@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>无标题文档</title>
+<style>
+.box {
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+</style>
+<script>
+window.onload = function () {
+	var box = document.querySelector(".box");
+	//box.style.background = "blue";
+	/* 
+		touchstart 手指触摸 == mousedown 
+		touchend 手指抬起 == mouseup
+		touchmove 手指抬起 == mousmove
+		
+		touch事件  在 chrome的模拟器下，部分版本 通过on的方式来添加事件无效
+	*/
+	box.ontouchstart = function () {
+		//this.style.background = "blue";
+		console.log(1);
+	};
+	box.ontouchend = function () {
+		//this.style.background = "red";
+		console.log(2);
+	};
+	box.ontouchmove = function () {
+		//this.style.background = "red";
+		console.log(3);
+	};
+};
+</script>
+</head>
+<body>
+<div class="box"></div>
+</body>
+</html>

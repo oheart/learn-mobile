@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>无标题文档</title>
+<style>
+html {
+	height: 100%;
+}
+body {
+	margin: 0;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+}
+#wrap {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+#scroll {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	background: #ccc;
+}
+</style>
+<script>
+/*
+	1.手指按下去的时候，记录下手指坐标
+	2.移动的时候，记录手指坐标 
+	3.用移动后的坐标 - 移动前的坐标 = 手指 移动的距离
+	4.手指按下去的时候，记录下元素的位置
+	5.移动之后，用手指移动的距离 + 元素的初始位置 =  元素现在所要在的位置 
+*/
+window.onload = function () {
+	var wrap = document.querySelector("#wrap");
+	var scroll = document.querySelector("#scroll");
+	var startPoint = 0;
+	var startEl = 0;
+	var maxTop =  wrap.clientHeight - scroll.offsetHeight;
+	console.log(maxTop);
+	wrap.addEventListener(
+		"touchstart",
+		function(e) {
+			var touch = e.changedTouches[0];
+			startPoint = touch.pageY;
+			startEl = scroll.offsetTop;
+		}
+	);
+	wrap.addEventListener(
+		"touchmove",
+		function(e) {
+			var touch = e.changedTouches[0];
+			var nowPoint = touch.pageY;
+			var dis = nowPoint - startPoint;
+			var top = startEl + dis;
+			if(top > 0) {
+				top = 0;
+			}
+			if(top < maxTop) {
+				top = maxTop;
+			}
+			scroll.style.top =  top +"px";
+		}
+	);
+};
+</script>
+</head>
+<body>
+<div id="wrap">
+	<div id="scroll">
+    	妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+        妙味课堂移动端课程--讲师：莫涛 <br>
+    </div>
+</div>
+</body>
+</html>

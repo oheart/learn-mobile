@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>无标题文档</title>
+<style>
+.box {
+	width: 100px;
+	height: 100px;
+	background: red;
+	position: relative;
+}
+.div {
+	position: absolute;
+	left: 150px;
+	top: 0;
+	width: 100px;
+	height: 100px;
+	background: yellow;
+}
+</style>
+<script>
+window.onload = function () {
+	var box = document.querySelector(".box");
+	var div = document.querySelector(".div");
+	box.addEventListener(
+		"touchstart",
+		function() {
+			console.log(1);
+		},
+		false
+	);
+	div.addEventListener(
+		"touchstart",
+		function() {
+			console.log(2);
+		},
+		false
+	);
+	/*
+		冒泡 ：点击元素 他会把这个事件一直向上传递 从下向上传递
+		捕获 ：从上向下传递
+	*/
+};
+</script>
+</head>
+<body>
+<div class="box">
+	 <div class="div"></div>
+</div>
+</body>
+</html>

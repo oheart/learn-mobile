@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>无标题文档</title>
+<style>
+#div {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 200px;
+	height: 200px;
+	background: rgba(204,255,0,.5);
+}
+</style>
+<script>
+document.addEventListener(
+	"touchmove",
+	function(e) {
+		e.preventDefault();
+	}
+);
+window.onload = function () {
+	var div = document.querySelector("#div");
+	/*
+		PC端鼠标事件 在移动端也可以正常使用，但是注意 事件的执行 会有300ms的延迟
+	
+		事件点透：
+			1. 在移动端 PC事件 有 300ms的延迟
+			2. 我们点击了页面之后，浏览器会记录点击下去的坐标
+			3. 300ms后，在该坐标找到现在在这的元素 执行事件
+		解决办法：
+			1. 阻止默认事件	(部分安卓机型不支持)
+			2. 不在移动端使用鼠标事件，不用a标签做页面跳转
+	*/
+	div.addEventListener(
+		"touchend",
+		function (e) {
+			e.preventDefault();
+			this.style.display = "none";
+		}
+	);
+};
+</script>
+</head>
+<body>
+<a href="http://www.baidu.com">百度</a>
+<div id="div"></div>
+</body>
+</html>

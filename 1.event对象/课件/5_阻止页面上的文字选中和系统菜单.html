@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>无标题文档</title>
+<style>
+.box {
+	width: 100px;
+	height: 100px;
+	background: red;
+	position: relative;
+}
+
+</style>
+<script>
+document.addEventListener(
+	"touchstart",
+	function(e) {
+		e.preventDefault();
+	}
+);
+/*
+	e.preventDefault(); 阻止默认事件
+	
+	阻止掉：document touchstart的默认事件，可以解决一下问题：
+		1. 阻止页面上的文字被选中    -- 可以通过阻止冒泡使某个元素上的文字被选中
+		2. 阻止页面上的系统菜单
+		
+	隐患:
+		页面上的所有滚动条失效	
+		
+		
+*/
+window.onload = function () {
+	var box = document.querySelector(".box");
+	var div = document.querySelector(".div")
+	box.addEventListener(
+		"touchstart",
+		function(ev) {
+			console.log(ev);
+		},
+		false
+	);
+	div.addEventListener(
+		"touchstart",
+		function(e) {
+			e.stopPropagation();
+		},
+		false
+	);
+	/*
+		事件函数中 默认的第一个 参数 是 event对象
+	*/
+};
+</script>
+</head>
+<body>
+<div class="div">激活码：1234</div>
+<div class="box">妙味课堂移动端课程--讲师：莫涛</div>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+妙味课堂移动端课程--讲师：莫涛 <br>
+</body>
+</html>
