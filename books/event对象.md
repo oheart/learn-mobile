@@ -113,7 +113,7 @@ copy.addEventListener(
     false
 )
 ```
-## 阻止document的touchstart 或者 touchmove，可以清除系统默认的回弹
+## 阻止document的touchstart 或者 touchmove，可以清除系统默认的回弹(阻止掉橡皮筋效果)
 ```js
 document.addEventListener(
 	"touchstart",
