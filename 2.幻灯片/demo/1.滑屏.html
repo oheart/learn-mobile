@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>滑屏</title>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="full-screen" content="true" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="360-fullscreen" content="true" />
+    <meta content="telephone=no" name="format-detection" />
+    <!-- <link href="css/reset.css" rel="stylesheet" /> -->
+    <!-- <link href="css/style.css" rel="stylesheet" /> -->
+    <!-- <script src="js/fontSize.js"></script> -->
+    <style id="css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+           list-style:none;
+        }
+        
+        img{
+            display: block;
+        }
+
+        #wrap {
+            overflow: hidden;
+            position: relative;
+        }
+
+        #list {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #list li{
+            float: left;
+        }
+        #list img{
+            width: 100%;
+        }
+        #nav{
+            position: absolute;
+            left: 0;
+            bottom: 3px;
+            width: 100%;
+            line-height: 10px;
+            text-align: center;
+        }
+        #nav span{
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #c00;
+            border-radius: 5px;
+        }
+        #nav .active{
+            background: #0F0;
+        }
+        
+    </style>
+    <script>
+        // 阻止默认的橡皮筋效果
+        document.addEventListener(
+            'touchstart',
+            function(e){
+                e.preventDefault();
+            },
+            {
+                passive: false
+            }
+        )
+        window.onload = function(){
+            var wrap = document.querySelector('#wrap');
+            var list = document.querySelector('#list');
+            var lis = document.querySelectorAll('#list li');
+            var css = document.querySelector('#css');
+            var nav = document.querySelectorAll('#nav span');
+
+            // wrap.style.height = lis[0].offsetHeight + 'px';  // 给外框设置高度，撑开
+            // list.style.width = lis.length  + "00%";
+
+            var style = "";
+            style = "#wrap{height:"+ lis[0].offsetHeight +"px}";
+            style += "#list{width:" + lis.length + "00%}";
+            style += "#list li{width:" + ( 1/lis.length * 100 ) + "%}"
+            css.innerHTML += style;
+
+            // 拖拽
+            var startPoint = 0; // 手指的初始坐标
+            var startX = 0;  // 元素的初始坐标
+            wrap.addEventListener(
+                'touchstart',
+                function(e){
+                    startPoint = e.changedTouches[0].pageX;
+                    startX = list.offsetLeft;
+                }
+            )
+            wrap.addEventListener(
+                'touchmove',
+                function(e){
+                    var nowPoint = e.changedTouches[0].pageX;
+                    var dis = nowPoint - startPoint;  // 手指移动距离差值
+                    var left = startX + dis;  // 需要移动的距离
+                    list.style.left = left + 'px';
+                }
+            )
+            wrap.addEventListener(
+                'touchend',
+                function(e){
+                    var left = list.offsetLeft;  // 获取到当前移动的left值
+                    var now = Math.round(-left/ wrap.offsetWidth); 
+                    left = -now * wrap.offsetWidth;
+                    list.style.left = left + 'px';
+                     // 获取要停留在那张图的位置
+                    console.log('now', now);
+                    
+                    for(var i = 0; i < nav.length; i++){
+                        nav[i].className = ''
+                    }
+                    nav[now].className = 'active'
+
+                }
+            )
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <ul id="list">
+            <li>
+                <a href="#">
+                    <img src="img/1.jpg" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="img/2.jpg" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="img/3.jpg" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="img/4.jpg" />
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <img src="img/5.jpg" />
+                </a>
+            </li>
+        </ul>
+        <nav id="nav">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </nav>
+    </div>
+</body>
+
+</html>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>幻灯片</title>
+    <title>滑屏-添加切换动画</title>
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -22,10 +22,10 @@
         }
 
         li {
-           list-style:none;
+            list-style: none;
         }
-        
-        img{
+
+        img {
             display: block;
         }
 
@@ -39,13 +39,16 @@
             left: 0;
             top: 0;
         }
-        #list li{
+
+        #list li {
             float: left;
         }
-        #list img{
+
+        #list img {
             width: 100%;
         }
-        #nav{
+
+        #nav {
             position: absolute;
             left: 0;
             bottom: 3px;
@@ -53,69 +56,88 @@
             line-height: 10px;
             text-align: center;
         }
-        #nav span{
+
+        #nav span {
             display: inline-block;
             width: 10px;
             height: 10px;
             background: #c00;
             border-radius: 5px;
         }
-        #nav .active{
+
+        #nav .active {
             background: #0F0;
         }
-        
     </style>
+    <script src="js/cssTransform.js"></script>
     <script>
         // 阻止默认的橡皮筋效果
         document.addEventListener(
             'touchstart',
-            function(e){
+            function (e) {
                 e.preventDefault();
             },
             {
                 passive: false
             }
         )
-        window.onload = function(){
+        window.onload = function () {
             var wrap = document.querySelector('#wrap');
             var list = document.querySelector('#list');
             var lis = document.querySelectorAll('#list li');
             var css = document.querySelector('#css');
+            var nav = document.querySelectorAll('#nav span');
 
-            // wrap.style.height = lis[0].offsetHeight + 'px';  // 给外框设置高度，撑开
-            // list.style.width = lis.length  + "00%";
 
             var style = "";
-            style = "#wrap{height:"+ lis[0].offsetHeight +"px}";
+            style = "#wrap{height:" + lis[0].offsetHeight + "px}";
             style += "#list{width:" + lis.length + "00%}";
-            style += "#list li{width:" + ( 1/lis.length * 100 ) + "%}"
+            style += "#list li{width:" + (1 / lis.length * 100) + "%}"
             css.innerHTML += style;
 
             // 拖拽
             var startPoint = 0; // 手指的初始坐标
             var startX = 0;  // 元素的初始坐标
+            cssTransform(list, 'translateX', 0);  // 设置translateX初始值
             wrap.addEventListener(
                 'touchstart',
-                function(e){
+                function (e) {
                     startPoint = e.changedTouches[0].pageX;
-                    startX = list.offsetLeft;
+                    startX = cssTransform(list, 'translateX');
+                    list.style.transition = 'none';
                 }
             )
             wrap.addEventListener(
                 'touchmove',
-                function(e){
+                function (e) {
                     var nowPoint = e.changedTouches[0].pageX;
                     var dis = nowPoint - startPoint;  // 手指移动距离差值
-                    var left = startX + dis;  // 需要移动的距离
-                    list.style.left = left + 'px';
+                    cssTransform(list, 'translateX', startX + dis);  // 设置translateX
                 }
             )
             wrap.addEventListener(
                 'touchend',
-                function(e){
-                    var left = list.offsetLeft;  // 获取到当前移动的left值
-                    var now = Math.round(-left/ wrap.offsetWidth);  // 获取要停留在那张图的位置
-                    console.log('now', now)
+                function (e) {
+                    var translateX = cssTransform(list, 'translateX');
+                    var now = Math.round(-translateX / wrap.offsetWidth);
+                    // 控制边界超出
+                    if(now < 0){
+                        now = 0;
+                    }
+                    if(now > nav.length -1){
+                        now = nav.length -1;
+                    }
+
+                    list.style.transition = ".5s";
+
+                    cssTransform(list, 'translateX', -now * wrap.offsetWidth)
+                    // 获取要停留在那张图的位置
+                    console.log('now', now);
+
+                    for (var i = 0; i < nav.length; i++) {
+                        nav[i].className = ''
+                    }
+                    nav[now].className = 'active'
                 }
             )
 

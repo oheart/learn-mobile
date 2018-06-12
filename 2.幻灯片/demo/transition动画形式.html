@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>transition动画形式</title>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="full-screen" content="true" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="360-fullscreen" content="true" />
+    <meta content="telephone=no" name="format-detection" />
+    <style>
+       .box{
+           width: 200px;
+           height: 200px;
+           background: red;
+           transition: 1s width ease;        /* 慢-快-慢 */
+           transition: 1s width ease-in-out;    /* 慢-快-慢 */
+           transition: 1s linear;  /* 匀速 */
+           transition: 5s width cubic-bezier(.22,1.43,.73,1.24);  /*调整贝塞尔曲线控制过渡的形式*/
+       }
+       .box:hover{
+          width: 800px;
+       }
+       /*
+            transition-property 动画样式
+            transition-duration 动画时间
+            transition-delay 延迟时间
+            transition-timing-function 动画形式
+       */
+    </style>
+</head>
+<body>
+   <div class="box"></div>
+</body>
+</html>
