@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=0.5,minimum-scale=0.5,maximum-scale=0.5" />-->
+<script>
+	var width = window.screen.width;
+	var targetW = 320; 
+	var scale = width / targetW;
+	var meta = document.createElement('meta');
+	meta.setAttribute('name', 'viewport');
+	meta.setAttribute('content', "user-scalable=no,initial-scale="+scale+",minimum-scale="+scale+",maximum-scale="+scale);
+	document.head.appendChild(meta);
+	/*
+	设置了 viewport 默认就是 device-width 不设置 
+	*/
+</script>
+<title>无标题文档</title>
+<style>
+	body {
+		margin: 0;
+	}
+	#box {
+		width: 300px;
+		height: 300px;
+		margin: 0 auto;
+		background: red;
+	}
+/*
+	1. 页面宽度定死 -- 320
+	2. 动态的设置 viewport 把可视区的宽度设置成 320
+        width = [pixel_value | device-width ] ,
+        initial-scale = float_value ,
+        minimum-scale = float_value ,
+        maximum-scale = float_value ,
+        user-scalable = [yes | no] ,
+*/
+</style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+</html>		

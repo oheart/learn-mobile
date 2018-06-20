@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>无标题文档</title>
+<script>
+setRem();
+window.addEventListener("orientationchange", setRem);
+window.addEventListener("resize", setRem);
+function setRem() {
+	var html = document.querySelector("html");
+	var width = html.getBoundingClientRect().width;
+	html.style.fontSize = width / 16 + "px";
+}
+</script>
+<link href="css/index.css" rel="stylesheet" />
+</head>
+<body>
+<section class="wrap">
+	<header id="header">
+		<div class="headerC">
+			<h1 id="logo">
+				<a href="#">
+					<img src="img/logo.png">
+				</a>
+			</h1>
+			<a href="javascript:;" id="menuBtn" class="menuBtnShow"></a>
+			<nav id="btns">
+				<a href="#" class="searchBtn">搜索</a>
+				<a href="#">登陆</a>
+				<a href="#">注册</a>
+			</nav>
+		</div>
+	</header>
+</section>
+</body>
+</html>		

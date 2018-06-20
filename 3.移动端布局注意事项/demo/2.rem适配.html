@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>template</title>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="full-screen" content="true" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="360-fullscreen" content="true" />
+    <meta content="telephone=no" name="format-detection" />
+    <!-- <link href="css/reset.css" rel="stylesheet" /> -->
+    <!-- <link href="css/style.css" rel="stylesheet" /> -->
+    <!-- <script src="js/fontSize.js"></script> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 10rem;
+            height: 10rem;
+            background: red;
+        }
+
+        /*
+            em根据自身的字体大小计算自己的尺寸
+            rem 根据根节点(html)的字体大小来计算自己的尺寸
+
+            适配：
+            各个移动设备，分辨率大小不一致，使我们的页面在各种分辨率下都显示完好（等比的缩放）；
+            根据屏幕的分辨率，动态的设置html的字体大小来达到页面等比缩放的功能   
+            1. 保证html最终算出来的字体大小不能小于12（由于页面上字体大小最小是12px）
+              
+       */
+    </style>
+    <script>
+        (function () {
+            var html = document.querySelector('html');
+            var width = html.getBoundingClientRect().width;
+            console.log(html.getBoundingClientRect())
+            html.style.fontSize = width / 16 + 'px';  // 1rem等于屏幕宽度的16分之一
+            
+        })()
+    </script>
+</head>
+
+<body>
+    <div id="box"></div>
+</body>
+
+</html>

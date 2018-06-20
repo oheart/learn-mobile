@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script>
+	var width = (window.orientation == 90||window.orientation == -90)? window.screen.height: window.screen.width
+	var targetW = 320; 
+	var scale = width / targetW;
+	var meta = document.createElement('meta');
+	alert(width);
+	meta.setAttribute('name', 'viewport');
+	meta.setAttribute('content', "user-scalable=no,initial-scale="+scale+",minimum-scale="+scale+",maximum-scale="+scale);
+	document.head.appendChild(meta);
+window.addEventListener(
+	"orientationchange", 
+	function() {
+		setTimeout(
+			function() {
+				window.location.href = window.location.href;
+			},
+			1000
+		);
+	}
+);
+window.addEventListener(
+	"resize", 
+	function() {
+		setTimeout(
+			function() {
+				window.location.href = window.location.href;
+			},
+			1000
+		);
+	}
+);
+</script>
+<title>无标题文档</title>
+<style>
+	body {
+		margin: 0;
+	}
+	#box {
+		width: 300px;
+		height: 300px;
+		margin: 0 auto;
+		background: red;
+	}
+</style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+</html>		

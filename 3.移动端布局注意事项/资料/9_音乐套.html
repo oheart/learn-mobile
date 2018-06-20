@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>无标题文档</title>
+<script>
+setRem();
+window.addEventListener("orientationchange", setRem);
+window.addEventListener("resize", setRem);
+function setRem() {
+	var html = document.querySelector("html");
+	var width = html.getBoundingClientRect().width;
+	html.style.fontSize = width / 16 + "px";
+}
+</script>
+<style>
+body, 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dd {
+	margin: 0;
+	-webkit-text-size-adjust: 100%;
+	font-family: Helvetica;
+}
+ul,
+ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+img {
+	vertical-align: top;
+}
+a {
+	text-decoration: none;
+}
+a,
+input,
+button {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-appearance: none;
+}
+html,
+body {
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+}
+.wrap {
+	height: 100%;
+	overflow: auto;
+}
+#header {
+	position: absolute;
+	background: rgba(0, 0, 0, .6);
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+.headerC {
+	height: 2rem;
+}
+#logo {
+	float: left;
+}
+</style>
+</head>
+<body>
+<section class="wrap">
+	<header id="header">
+		<div class="headerC">
+			<h1 id="logo">
+				<a href="#">
+					<img src="img/logo.png">
+				</a>
+			</h1>
+		</div>
+	</header>
+</section>
+</body>
+</html>		
